@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import {SimpleDN404} from "../src/example/SimpleDN404.sol";
+import {SimpleDN404} from "../../src/mocks/SimpleDN404.sol";
 import "forge-std/Script.sol";
 
 contract SimpleDN404Script is Script {
@@ -15,7 +15,7 @@ contract SimpleDN404Script is Script {
         // CHANGE THESE VALUES TO SUIT YOUR NEEDS
         string memory name = "DN404";
         string memory symbol = "DN";
-        uint96 initialSupply = 1000;
+        uint96 initialSupply = 10;
         address owner = address(this);
 
         new SimpleDN404(name, symbol, uint96(initialSupply * _WAD), owner);

@@ -1,11 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import "../DN404.sol";
-import "../DN404Mirror.sol";
-import {Ownable} from "solady/auth/Ownable.sol";
-import {LibString} from "solady/utils/LibString.sol";
-import {SafeTransferLib} from "solady/utils/SafeTransferLib.sol";
+import "../dn404/DN404.sol";
+import "../dn404/DN404Mirror.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 /**
  * @title SimpleDN404
@@ -23,9 +22,7 @@ contract SimpleDN404 is DN404, Ownable {
         string memory symbol_,
         uint96 initialTokenSupply,
         address initialSupplyOwner
-    ) {
-        _initializeOwner(msg.sender);
-
+    ) Ownable(msg.sender) {
         _name = name_;
         _symbol = symbol_;
 
@@ -43,7 +40,7 @@ contract SimpleDN404 is DN404, Ownable {
 
     function _tokenURI(uint256 tokenId) internal view override returns (string memory result) {
         if (bytes(_baseURI).length != 0) {
-            result = string(abi.encodePacked(_baseURI, LibString.toString(tokenId)));
+            result = string(abi.encodePacked(_baseURI, Strings.toString(tokenId)));
         }
     }
 
@@ -57,6 +54,6 @@ contract SimpleDN404 is DN404, Ownable {
     }
 
     function withdraw() public onlyOwner {
-        SafeTransferLib.safeTransferAllETH(msg.sender);
+        payable(msg.sender).transfer(address(this).balance);
     }
 }
