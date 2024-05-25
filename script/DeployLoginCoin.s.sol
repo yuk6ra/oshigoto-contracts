@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import {LoginCoin} from "../../src/LoginCoin.sol";
+import {LoginCoin} from "../src/LoginCoin.sol";
 import "forge-std/Script.sol";
 
 contract LoginCoinScript is Script {
@@ -15,7 +15,6 @@ contract LoginCoinScript is Script {
         // CHANGE THESE VALUES TO SUIT YOUR NEEDS
         string memory name = "LoginCoin";
         string memory symbol = "LC";
-        address owner = address(this);
 
         new LoginCoin(name, symbol);
         vm.stopBroadcast();
