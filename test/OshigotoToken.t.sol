@@ -4,16 +4,21 @@ pragma solidity ^0.8.13;
 import {Test, console} from "forge-std/Test.sol";
 import {OshigotoToken} from "../src/OshigotoToken.sol";
 import {LoginCoin} from "../src/LoginCoin.sol";
+import {DN404Mirror} from "../src/dn404/DN404Mirror.sol";
 
 contract OshigotoTest is Test {
     OshigotoToken dn;
     address alice = address(111);
 
     LoginCoin loginCoin;
+    DN404Mirror nft;
+
+    uint96 initialTokenSupply = 1*10**18;
 
     function setUp() public {
+
         vm.prank(alice);
-        dn = new OshigotoToken("DN404", "DN", 0, address(this));
+        dn = new OshigotoToken("DN404", "DN", initialTokenSupply, address(this));
 
         loginCoin = new LoginCoin("LoginCoin", "LC");
     }
@@ -21,10 +26,10 @@ contract OshigotoTest is Test {
     function testMint() public {
 
         vm.prank(dn.owner());
-        dn.setPriceWithNativeToken(1);
-        dn.mintWithNativeToken{value: 1}();
+        dn.setPriceWithNativeToken(0.01 ether);
+        dn.mintWithNativeToken{value: 0.01 ether}();
 
-        assertEq(dn.totalSupply(), 1);
+        assertEq(dn.totalSupply(), initialTokenSupply + 1);
     }
 
     function testMintWithERC20Token() public {
@@ -41,7 +46,7 @@ contract OshigotoTest is Test {
         console.log("alice balance: ", loginCoin.balanceOf(alice));
         console.log("OshigotoToken balance: ", dn.balanceOf(alice));
 
-        assertEq(dn.totalSupply(), 1);
+        assertEq(dn.totalSupply(), initialTokenSupply + 1);
 
         vm.stopPrank();
     }
@@ -61,5 +66,26 @@ contract OshigotoTest is Test {
         dn.withdrawWithNativeToken();
         assertEq(address(dn).balance, 0);
         assertEq(alice.balance, 1 ether);
+    }
+
+    function testMint2() public {
+        vm.prank(alice);
+        dn.setMintAmount(1*10**18);
+
+        dn.mintWithNativeToken{value: 1 ether}();
+
+        vm.prank(alice);
+        dn.setDataURI("https://example.com/");
+
+
+        console.log("address of DN404Mirror: ", address(dn.mirrorERC721()));
+        console.log("OshigotoToken balance: ", dn.balanceOf(alice));
+        console.log("OshigotoToken totalSupply: ", dn.totalSupply());
+
+        // Read DN404Mirror contract
+        DN404Mirror mirror = DN404Mirror(payable(address(dn.mirrorERC721())));
+        console.log("name: ", mirror.name());
+        console.log("totalSupply: ", mirror.totalSupply());
+        console.log("tokenURI: ", mirror.tokenURI(0));
     }
 }

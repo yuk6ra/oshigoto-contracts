@@ -18,13 +18,20 @@ contract OshigotoToken is DN404, Ownable {
     string private _symbol;
     string private _baseURI;
 
-    string public baseTokenURI = "https://example.com/token/";
-    string public dataURI = "https://example.com/data/";
+    string public dataURI;
+    string public extension = ".json";
 
     uint256 public priceWithERC20Token = 2000;
-    uint256 public priceWithNativeToken = 100_000_000_000_000_000;
-    uint256 public mintAmount = 1;
+    uint256 public priceWithNativeToken = 0.01 ether;
+    uint256 public mintAmount = 1 * 10**18;
     IERC20 public paymentToken;
+
+    // struct Pattern {
+    //     uint256 percentage;
+    //     string path;        
+    // }
+
+    // mapping(uint256 => Pattern) public patterns;
 
     constructor(
         string memory name_,
@@ -48,52 +55,38 @@ contract OshigotoToken is DN404, Ownable {
     }
 
     function _tokenURI(uint256 tokenId) internal view override returns (string memory result) {
-        if (bytes(baseTokenURI).length > 0) {
-            result = string.concat(baseTokenURI, Strings.toString(tokenId));
+        uint8 seed = uint8(bytes1(keccak256(abi.encodePacked(tokenId))));
+        string memory trait;
+
+        // Example of using patterns
+        if (seed <= 153) {
+            trait = "common";
+        } else if (seed <= 204) {
+            trait = "uncommon";
+        } else if (seed <= 229) {
+            trait = "rare";
+        } else if (seed <= 242) {
+            trait = "superrare";
         } else {
-            uint8 seed = uint8(bytes1(keccak256(abi.encodePacked(tokenId))));
-            string memory image;
-            string memory color;
+            trait = "ultrarare";
+        }
 
-            if (seed <= 100) {
-                image = "1.gif";
-                color = "green";
-            } else if (seed <= 160) {
-                image = "2.gif";
-                color = "blue";
-            } else if (seed <= 210) {
-                image = "3.gif";
-                color = "purple";
-            } else if (seed <= 240) {
-                image = "4.gif";
-                color = "orange";
-            } else if (seed <= 255) {
-                image = "5.gif";
-                color = "red";
-            }
+        string memory json = string.concat(
+            '{"name": "Oshigoto #', Strings.toString(tokenId), '",',
+            '"external_url":"",',
+            '"image":"', dataURI, trait, '.png",',
+            '"attributes":[{"trait_type":"Type","value":"', trait, '"}]}'
+        );
 
-            string memory jsonPreImage = string.concat(
-                string.concat(
-                    string.concat('{"name": "Oshigoto #', Strings.toString(tokenId)),
-                    '","","external_url":"","image":"'
-                ),
-                string.concat(dataURI, image)
-            );
-            string memory jsonPostImage = string.concat(
-                '","attributes":[{"trait_type":"Color","value":"',
-                color
-            );
-            string memory jsonPostTraits = '"}]}';
-
-            result = string.concat(
-                        "data:application/json;utf8,",
-                        string.concat(
-                            string.concat(jsonPreImage, jsonPostImage),
-                            jsonPostTraits
-                        )
-                    );
-            }
+        result = string.concat(
+                    "data:application/json;utf8,",
+                    json
+                );
     }
+
+    // function setPattern(uint256 _pattern_id, uint256 _percentage, string memory _path) public onlyOwner {
+    //     patterns[_pattern_id] = Pattern(_percentage, _path);
+    // }
 
     function mintWithERC20Token() public {
         require(paymentToken.balanceOf(msg.sender) >= priceWithERC20Token, "Insufficient token balance");
@@ -105,10 +98,7 @@ contract OshigotoToken is DN404, Ownable {
     }
 
     function mintWithNativeToken() public payable {
-        require(msg.value >= priceWithNativeToken, "Insufficient payment");
-        
-        payable(owner()).transfer(msg.value);
-
+        require(msg.value >= priceWithNativeToken, "Insufficient payment");    
         _mint(msg.sender, mintAmount);
     }
 
@@ -123,8 +113,8 @@ contract OshigotoToken is DN404, Ownable {
         }
     }
 
-    function setBaseURI(string calldata baseURI_) public onlyOwner {
-        _baseURI = baseURI_;
+    function setDataURI(string calldata _dataURI) public onlyOwner {
+        dataURI = _dataURI;
     }
 
     function setMintAmount(uint256 _amount) public onlyOwner {
