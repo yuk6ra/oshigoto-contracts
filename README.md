@@ -1,7 +1,33 @@
 # Oshigoto Contracts
 ## Overview
 
+Our project, "Oshigoto," aims to create an economic zone within the metaverse to support fan activities. This repository contains test contracts intended for an EVM environment.
+
+## About ERC-7631
+
+![ERC-7631](./assets/erc7631.png)
+
+> A fungible ERC-20 token contract and non-fungible ERC-721 token contract can be interlinked, allowing actions performed on one contract to be reflected on the other. This proposal defines how the relationship between the two token contracts can be queried. It also enables accounts to configure whether ERC-721 mints and transfers should be skipped during ERC-20 to ERC-721 synchronization.
+> - [ERC-7631, Abstract](https://eips.ethereum.org/EIPS/eip-7631)
+
+## About Oshigoto Token
+
+This is a donation contract using ERC7631. It is a system where fans can donate to creators using ERC20 or native tokens and receive omikuji or points in return.
+
+![Oshigoto Token](./assets/oshigoto-token.png)
+
+Automatically generated NFTs can be merged with NFTs intended for fan club members. Additionally, these NFTs are managed on-chain. Of course, membership and automatically generated NFTs can also be sold and purchased through the market.
+
+![Membership](./assets/membership.png)
+
 ## Contracts
+| Contract                                 | Description      | Status |
+| ---------------------------------------- | ---------------- | ------ |
+| [LoginCoin](./src/LoginCoin.sol)         | ERC20 Demo Token | Draft  |
+| [CheckCoin](./src/CheckCoin.sol)         | ERC20 Demo Token | Draft  |
+| [OshigotoToken](./src/OshigotoToken.sol) | ERC20 Token      | Draft  |
+| OshigotoMembership                       | ERC721 Token     | Idea   |
+| OshigotoFactory                          | ERC6551 Token    | Idea   |
 
 ## Foundry
 
@@ -90,3 +116,4 @@ forge verify-contract --etherscan-api-key ${KEY} ${CONTRACT_ADDRESS} ./src/Login
 ## References
 - Pandora Contract: [0x9E9FbDE7C7a83c43913BddC8779158F1368F0413](https://etherscan.io/address/0x9e9fbde7c7a83c43913bddc8779158f1368f0413#code)
 - [DN404](https://github.com/Vectorized/dn404)
+- [ERC-7631](https://eips.ethereum.org/EIPS/eip-7631)
