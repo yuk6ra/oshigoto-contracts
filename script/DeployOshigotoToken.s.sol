@@ -12,7 +12,7 @@ contract OshigotoTokenScript is Script {
         // SimpleDN404 constructor args -- name, symbol, initialSupply, owner
         // CHANGE THESE VALUES TO SUIT YOUR NEEDS
         string memory name = "Oshigoto Token";
-        string memory symbol = "OST"
+        string memory symbol = "OST";
         uint96 initialSupply = 0;
         address owner = address(this);
 

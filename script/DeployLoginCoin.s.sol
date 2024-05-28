@@ -16,7 +16,10 @@ contract LoginCoinScript is Script {
         string memory name = "LoginCoin";
         string memory symbol = "LC";
 
-        new LoginCoin(name, symbol);
+        LoginCoin c = new LoginCoin(name, symbol);
+
+        // Mint 1000 LC to the deployer
+        c.mint(address(this), 2000 * _WAD);
         vm.stopBroadcast();
     }
 }

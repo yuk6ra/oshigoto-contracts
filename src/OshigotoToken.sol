@@ -21,9 +21,9 @@ contract OshigotoToken is DN404, Ownable {
     string public dataURI;
     string public extension = ".json";
 
-    uint256 public priceWithERC20Token = 2000;
+    uint256 public priceWithERC20Token = 200 * 10**18;
     uint256 public priceWithNativeToken = 0.01 ether;
-    uint256 public mintAmount = 1 * 10**18;
+    uint256 public mintAmount = 5 * 10**17;
     IERC20 public paymentToken;
 
     // struct Pattern {
