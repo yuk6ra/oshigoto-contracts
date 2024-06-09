@@ -20,6 +20,8 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
 
     mapping(uint256 => MembershipConfig) public membershipConfigs;
 
+    mapping(address => uint256) public tokenIds;
+
     constructor(
         string memory _name,
         string memory _symbol,
@@ -29,13 +31,20 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
     }
 
     function mintMembership() external nonReentrant {
+        require(tokenIds[msg.sender] == 0, "Membership already minted");
+
         MembershipConfig memory membershipConfigs = MembershipConfig({
             burnAmount: 0,
             lastBurned: block.timestamp
         });
 
         _safeMint(msg.sender, totalSupply);        
+        tokenIds[msg.sender] = totalSupply;
         totalSupply++;
+    }
+
+    function getTokenIdFromAddress(address _address) external view returns (uint256) {
+        return tokenIds[_address];
     }
 
     function tokenURI(
