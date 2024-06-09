@@ -22,7 +22,7 @@ contract OshigotoToken is DN404, Ownable {
     string public extension = ".json";
 
     uint256 public priceWithERC20Token = 200 * 10**18;
-    uint256 public priceWithNativeToken = 0.01 ether;
+    uint256 public priceWithNativeToken = 0.0001 ether;
     uint256 public mintAmount = 5 * 10**17;
     IERC20 public paymentToken;
 
@@ -88,18 +88,18 @@ contract OshigotoToken is DN404, Ownable {
     //     patterns[_pattern_id] = Pattern(_percentage, _path);
     // }
 
-    function mintWithERC20Token() public {
+    function mintWithERC20Token(address _to) public {
         require(paymentToken.balanceOf(msg.sender) >= priceWithERC20Token, "Insufficient token balance");
         require(paymentToken.allowance(msg.sender, address(this)) >= priceWithERC20Token, "Token allowance too low");
 
         paymentToken.transferFrom(msg.sender, address(this), priceWithERC20Token);
 
-        _mint(msg.sender, mintAmount);
+        _mint(_to, mintAmount);
     }
 
-    function mintWithNativeToken() public payable {
+    function mintWithNativeToken(address _to) public payable {
         require(msg.value >= priceWithNativeToken, "Insufficient payment");    
-        _mint(msg.sender, mintAmount);
+        _mint(_to, mintAmount);
     }
 
     function ownerMint(address _to, uint256 _amount) public onlyOwner {

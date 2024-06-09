@@ -16,6 +16,22 @@ deploy-oshigototoken:
 	@echo "Deploying contract"
 	forge script script/DeployOshigotoToken.s.sol:OshigotoTokenScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
 
+deploy-erc6551:
+	@echo "Deploying contract"
+	forge script script/DeployERC6551Registry.s.sol:ERC6551RegistryScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
+
+deploy-membership:
+	@echo "Deploying contract"
+	forge script script/DeployOshigotoMembership.s.sol:OshigotoMembershipScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
+
+deploy-tba:
+	@echo "Deploying contract"
+	forge script script/DeployTokenBoundAccount.s.sol:TokenBoundAccountScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
+
+deploy-checkcoin:
+	@echo "Deploying contract"
+	forge script script/DeployCheckCoin.s.sol:CheckCoinScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
+
 verify-mock-dn404:
 	@echo "Verifying contract"
 	forge verify-contract --etherscan-api-key ${ETHERSCAN_API_KEY} ${}  ./src/LoginCoin.sol:LoginCoin --chain 11155111
