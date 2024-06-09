@@ -31,7 +31,7 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
     }
 
     function mintMembership() external nonReentrant {
-        require(tokenIds[msg.sender] == 0, "Membership already minted");
+        // require(tokenIds[msg.sender] == 0, "Membership already minted");
 
         MembershipConfig memory membershipConfigs = MembershipConfig({
             burnAmount: 0,
