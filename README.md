@@ -1,7 +1,8 @@
 # Oshigoto Contracts
 ## Overview
-
 Our project, "Oshigoto," aims to create an economic zone within the metaverse to support fan activities. This repository contains test contracts intended for an EVM environment.
+
+![Oshigoto](./assets/proto-1.png)
 
 ## About ERC-7631
 
