@@ -43,6 +43,22 @@ Automatically generated NFTs can be merged with NFTs intended for fan club membe
 | [ERC6551Registry](./src/ERC6551Registry.sol)       | ERC6551 Registry       | Draft  |
 | [TokenBoundAccount](./src/TokenBoundAccount.sol)   | ERC6551 Implementation | Draft  |
 
+## Tech Stack
+- UE5
+- HTTP Plugin
+- Solidity
+- Foundry
+- ERC-7631（a.k.a DN404）
+- ERC-6551
+- Web3.py
+- FastAPI
+- Python
+- Azure Container Apps
+
+## API
+
+- [Oshigoto API](https://github.com/yuk6ra/oshigoto-backend)
+
 ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
