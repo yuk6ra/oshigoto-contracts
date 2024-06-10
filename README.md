@@ -11,6 +11,18 @@ Our project, "Oshigoto," aims to create an economic zone within the metaverse to
 > A fungible ERC-20 token contract and non-fungible ERC-721 token contract can be interlinked, allowing actions performed on one contract to be reflected on the other. This proposal defines how the relationship between the two token contracts can be queried. It also enables accounts to configure whether ERC-721 mints and transfers should be skipped during ERC-20 to ERC-721 synchronization.
 > - [ERC-7631, Abstract](https://eips.ethereum.org/EIPS/eip-7631)
 
+## About ERC-6551
+
+This system is designed to generate ERC-6551 accounts linked to membership cards issued under ERC-721. It is intended to be issued for each creator. The wallet is capable of receiving tokens issued through ERC-7631.
+
+> The system outlined in this proposal has two main components:
+> - A singleton registry for token bound accounts
+> - A common interface for token bound account implementations
+> The following diagram illustrates the relationship between NFTs, NFT holders, token bound accounts, and the Registry:
+
+
+![ERC-6551](./assets/erc6551-diagram.png)
+
 ## About Oshigoto Token
 
 This is a donation contract using ERC7631. It is a system where fans can donate to creators using ERC20 or native tokens and receive omikuji or points in return.
@@ -22,13 +34,14 @@ Automatically generated NFTs can be merged with NFTs intended for fan club membe
 ![Membership](./assets/membership.png)
 
 ## Contracts
-| Contract                                 | Description      | Status |
-| ---------------------------------------- | ---------------- | ------ |
-| [LoginCoin](./src/LoginCoin.sol)         | ERC20 Demo Token | Draft  |
-| [CheckCoin](./src/CheckCoin.sol)         | ERC20 Demo Token | Draft  |
-| [OshigotoToken](./src/OshigotoToken.sol) | ERC20 Token      | Draft  |
-| OshigotoMembership                       | ERC721 Token     | Idea   |
-| OshigotoFactory                          | ERC6551 Token    | Idea   |
+| Contract                                           | Description            | Status |
+| -------------------------------------------------- | ---------------------- | ------ |
+| [LoginCoin](./src/LoginCoin.sol)                   | ERC20 Demo Token       | Draft  |
+| [CheckCoin](./src/CheckCoin.sol)                   | ERC20 Demo Token       | Draft  |
+| [OshigotoToken](./src/OshigotoToken.sol)           | DN404 Token            | Draft  |
+| [OshigotoMembership](./src/OshigotoMembership.sol) | ERC721 Token           | Draft  |
+| [ERC6551Registry](./src/ERC6551Registry.sol)       | ERC6551 Registry       | Draft  |
+| [TokenBoundAccount](./src/TokenBoundAccount.sol)   | ERC6551 Implementation | Draft  |
 
 ## Foundry
 
@@ -118,3 +131,4 @@ forge verify-contract --etherscan-api-key ${KEY} ${CONTRACT_ADDRESS} ./src/Login
 - Pandora Contract: [0x9E9FbDE7C7a83c43913BddC8779158F1368F0413](https://etherscan.io/address/0x9e9fbde7c7a83c43913bddc8779158f1368f0413#code)
 - [DN404](https://github.com/Vectorized/dn404)
 - [ERC-7631](https://eips.ethereum.org/EIPS/eip-7631)
+- [ERC-6551](https://eips.ethereum.org/EIPS/eip-6551)
