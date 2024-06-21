@@ -12,7 +12,8 @@ contract OshigotoMembershipScript is Script {
         OshigotoMembership c = new OshigotoMembership(
             "AliceMembership",
             "AM",
-            "Alice"
+            "Alice",
+            0xF9C60953B6585Cb7616623DCCC2C3B176D34a8C5 // OshigotoToken address
         );
 
         vm.stopBroadcast();
