@@ -64,11 +64,11 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
         uint256 diff = block.timestamp - membershipConfigs[tokenId].lastBurned;
         string memory image = "";
 
-        if (diff > 3 minutes) {
+        if (diff < 3 minutes) {
             image = "https://bafybeicdgohbob4jqm5tdhsjyhnctmhu5niedbjmd7u3grivzwto4ogfxy.ipfs.dweb.link/";
-        } else if (diff > 5 minutes) {
+        } else if (diff < 5 minutes) {
             image = "https://bafybeieyj6woxz2wqbneglkmnittnrt6pdmte3qx5qumtpgbwpr4dcfmcm.ipfs.dweb.link/";
-        } else if (diff > 10 minutes) {
+        } else {
             image = "https://bafybeigjbiob7sgtmikg2lygwh3wgd42io72fpimx4tnkwu6hi5rg434mm.ipfs.dweb.link/";
         }
 

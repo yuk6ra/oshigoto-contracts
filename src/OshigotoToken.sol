@@ -18,7 +18,7 @@ contract OshigotoToken is DN404, Ownable {
     string private _symbol;
     string private _baseURI;
 
-    string public dataURI;
+    string public dataURI = "https://bafybeig7wwdixqpzaqoxvbagbfxjbzgljzdgwgnufekrwtjeb7cjjvu7n4.ipfs.dweb.link/";
     string public extension = ".json";
 
     uint256 public priceWithERC20Token = 200 * 10**18;
@@ -48,25 +48,23 @@ contract OshigotoToken is DN404, Ownable {
     }
 
     function _tokenURI(uint256 tokenId) internal view override returns (string memory result) {
-        uint8 seed = uint8(bytes1(keccak256(abi.encodePacked(tokenId))));
-        string memory trait;
+        uint8 rank = rankOf(tokenId);        
 
         // Example of using patterns
-        if (seed <= 153) {
+        if (rank == 1) {
             trait = "common";
-        } else if (seed <= 204) {
+        } else if (rank == 2) {
             trait = "uncommon";
-        } else if (seed <= 229) {
+        } else if (rank == 3) {
             trait = "rare";
-        } else if (seed <= 242) {
-            trait = "superrare";
-        } else {
-            trait = "ultrarare";
+        } else if (rank == 4) {
+            trait = "epic";
+        } else
+            trait = "legendary";
         }
 
         string memory json = string.concat(
             '{"name": "Oshigoto #', Strings.toString(tokenId), '",',
-            '"external_url":"",',
             '"image":"', dataURI, trait, '.png",',
             '"attributes":[{"trait_type":"Type","value":"', trait, '"}]}'
         );
