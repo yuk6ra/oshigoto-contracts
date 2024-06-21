@@ -6,7 +6,6 @@ import "./dn404/DN404Mirror.sol";
 import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
-import {IMirrorSeed} from "./interfaces/IMirrorSeed.sol";
 
 /**
  * @title SimpleDN404

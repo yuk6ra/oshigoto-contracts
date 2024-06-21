@@ -905,7 +905,7 @@ abstract contract DN404 {
         internal
         virtual
     {
-        if (to == address(0)) revert TransferToZeroAddress();
+        // if (to == address(0)) revert TransferToZeroAddress();
 
         DN404Storage storage $ = _getDN404Storage();
         if ($.mirrorERC721 == address(0)) revert DNNotInitialized();
