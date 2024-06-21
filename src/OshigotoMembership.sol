@@ -116,13 +116,4 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
     function lastBurnedOf(uint256 tokenId) external view returns (uint256) {
         return membershipConfigs[tokenId].lastBurned;
     }
-
-    // function burnAmount(uint256 tokenId, uint256 amount) external {
-    //     require(isMaterialContractAddress[msg.sender], "Only material contract can burn");
-    //     require(tokenIds[msg.sender] == tokenId, "Only owner can burn");
-    //     require(membershipConfigs[tokenId].burnAmount >= amount, "Not enough burn amount");
-
-    //     membershipConfigs[tokenId].burnAmount += amount;
-    //     membershipConfigs[tokenId].lastBurned = block.timestamp;
-    // }
 }
