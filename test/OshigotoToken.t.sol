@@ -11,7 +11,7 @@ contract OshigotoTest is Test {
     address alice = address(111);
 
     LoginCoin loginCoin;
-    DN404Mirror nft;
+    DN404Mirror public nft;
 
     uint96 initialTokenSupply = 1*10**18;
 
@@ -19,6 +19,8 @@ contract OshigotoTest is Test {
 
         vm.prank(alice);
         dn = new OshigotoToken("DN404", "DN", initialTokenSupply, address(this));
+
+        nft = DN404Mirror(payable(address(dn.mirrorERC721())));
 
         loginCoin = new LoginCoin("LoginCoin", "LC");
     }
@@ -36,17 +38,23 @@ contract OshigotoTest is Test {
         vm.startPrank(alice);
 
         loginCoin.mint(alice, 200);
-        console.log("alice balance: ", loginCoin.balanceOf(alice));
-        loginCoin.approve(address(dn), 100);
+        loginCoin.approve(address(dn), 200);
 
         dn.setPaymentTokenAddress(address(loginCoin));
-        dn.setPriceWithERC20Token(100);
+        dn.setPriceWithERC20Token(50);
 
-        // dn.mintWithERC20Token();
+        console.log(nft.totalSupply());
+        dn.mintWithERC20Token(alice);
+        dn.mintWithERC20Token(alice);
+        dn.mintWithERC20Token(alice);
+        console.log(nft.totalSupply());
         // console.log("alice balance: ", loginCoin.balanceOf(alice));
-        // console.log("OshigotoToken balance: ", dn.balanceOf(alice));
-
+        console.log("OshigotoToken balance: ", dn.balanceOf(alice));
         // assertEq(dn.totalSupply(), initialTokenSupply + 1);
+
+        dn.rankOf(1);
+        console.log("Hi");
+        console.log("rankOf: ", dn.rankOf(1));
 
         vm.stopPrank();
     }

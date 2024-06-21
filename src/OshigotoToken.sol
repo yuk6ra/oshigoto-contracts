@@ -6,6 +6,7 @@ import "./dn404/DN404Mirror.sol";
 import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
 import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import {IMirrorSeed} from "./interfaces/IMirrorSeed.sol";
 
 /**
  * @title SimpleDN404
@@ -25,13 +26,6 @@ contract OshigotoToken is DN404, Ownable {
     uint256 public priceWithNativeToken = 0.0001 ether;
     uint256 public mintAmount = 5 * 10**17;
     IERC20 public paymentToken;
-
-    // struct Pattern {
-    //     uint256 percentage;
-    //     string path;        
-    // }
-
-    // mapping(uint256 => Pattern) public patterns;
 
     constructor(
         string memory name_,
@@ -98,7 +92,7 @@ contract OshigotoToken is DN404, Ownable {
     }
 
     function mintWithNativeToken(address _to) public payable {
-        require(msg.value >= priceWithNativeToken, "Insufficient payment");    
+        require(msg.value >= priceWithNativeToken, "Insufficient payment");
         _mint(_to, mintAmount);
     }
 
@@ -140,5 +134,37 @@ contract OshigotoToken is DN404, Ownable {
     function withdrawWithERC20Token(address tokenAddress) public onlyOwner {
         IERC20 token = IERC20(tokenAddress);
         token.transfer(msg.sender, token.balanceOf(address(this)));
+    }
+
+    function rankOf(uint256 tokenId) public view returns (uint8) {
+        bytes32 seed = mirrorSeedOf(tokenId);
+        require(seed != 0, "Seed not found");
+
+        uint8 _seed = uint8(bytes1(seed));
+        // @dev rank generation based on rarity
+        // if (_seed <= 153) {
+        //     return 1;
+        // } else if (_seed <= 204) {
+        //     return 2;
+        // } else if (_seed <= 229) {
+        //     return 3;
+        // } else if (_seed <= 242) {
+        //     return 4;
+        // } else {
+        //     return 5;
+        // }
+
+        // @dev simple rank generation
+        if (_seed < 50) {
+            return 1;
+        } else if (_seed < 100) {
+            return 2;
+        } else if (_seed < 150) {
+            return 3;
+        } else if (_seed < 200) {
+            return 4;
+        } else {
+            return 5;
+        }
     }
 }

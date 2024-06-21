@@ -205,6 +205,8 @@ abstract contract DN404 {
         mapping(address => AddressData) addressData;
     }
 
+    mapping(uint256 => bytes32) private _seeds;
+
     /// @dev Returns a storage pointer for DN404Storage.
     function _getDN404Storage() internal pure virtual returns (DN404Storage storage $) {
         /// @solidity memory-safe-assembly
@@ -511,6 +513,7 @@ abstract contract DN404 {
                     _set(toOwned, toIndex, uint32(id));
                     _setOwnerAliasAndOwnedIndex(oo, id, t.toAlias, uint32(toIndex++));
                     _packedLogsAppend(t.packedLogs, id);
+                    _seeds[id] = _mirrorSeed(id);
                 } while (toIndex != t.toEnd);
 
                 $.nextTokenId = uint32(t.nextTokenId);
@@ -1725,5 +1728,13 @@ abstract contract DN404 {
             mstore(0x00, x)
             return(0x00, 0x20)
         }
+    }
+
+    function _mirrorSeed(uint256 tokenId) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked(tokenId, block.number, blockhash(block.number - 1), msg.sender));
+    }
+
+    function mirrorSeedOf(uint256 tokenId) public view returns (bytes32) {
+        return _seeds[tokenId];
     }
 }
