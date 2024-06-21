@@ -100,6 +100,11 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
         dn404Mirror.transferFrom(msg.sender, address(0), materialTokenId);
     }
 
+    function setOshigotoTokenAddress(address _address) external onlyOwner {
+        oshigotoToken = OshigotoToken(payable(_address));
+        dn404Mirror = DN404Mirror(payable(address(oshigotoToken.mirrorERC721())));
+    }
+
     function setMaterialContractAddress(address _address, bool _isMaterial) external onlyOwner {
         isMaterialContractAddress[_address] = _isMaterial;
     }
