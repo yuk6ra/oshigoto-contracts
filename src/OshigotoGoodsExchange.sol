@@ -68,6 +68,10 @@ contract OshigotoGoodsExchange is ERC5192, Ownable, ReentrancyGuard {
         paymentToken = IERC20(_paymentToken);
     }
 
+    function setDataURI(string memory _dataURI) external onlyOwner {
+        dataURI = _dataURI;
+    }
+
     function tokenURI(
         uint256 tokenId
     ) public view override returns (string memory) {

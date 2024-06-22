@@ -16,7 +16,7 @@ contract OshigotoGoodsExchangeScript is Script {
         string memory name = "Oshigoto Goods Exchange";
         string memory symbol = "OGX";
         string memory oshi_name = "Alice";
-        string memory dataURI = "https://alice.com";
+        string memory dataURI = "https://bafybeidk3siwfxbnp5jbiw7fho5rjrf4gytjejrizcydxmz2upphnrjguy.ipfs.dweb.link/";
 
         address owner = address(this);
 
@@ -30,7 +30,7 @@ contract OshigotoGoodsExchangeScript is Script {
             address(checkCoin)
         );
 
-        // checkCoin.approve(address(oshigotoToken), 1000);
+        checkCoin.approve(address(oshigotoGoodsExchange), 1000 ether);
         vm.stopBroadcast();
     }
 }

@@ -20,7 +20,7 @@ contract OshigotoMembershipTest is Test {
     function setUp() public {
 
         vm.startPrank(alice);
-        oshigotoToken = new OshigotoToken("DN404", "DN", initialTokenSupply, address(this));
+        oshigotoToken = new OshigotoToken("DN404", "DN", "Alice", initialTokenSupply, address(this));
         dn404mirror = DN404Mirror(payable(address(oshigotoToken.mirrorERC721())));
         loginCoin = new LoginCoin("LoginCoin", "LC");
 
@@ -71,5 +71,7 @@ contract OshigotoMembershipTest is Test {
 
         console.log("burnPointOf: ", oshigotoMembership.burnPointOf(0));
         console.log("lastBurned: ", oshigotoMembership.lastBurnedOf(0));
+
+        console.log(oshigotoMembership.tokenURI(0));
     }
 }

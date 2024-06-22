@@ -89,7 +89,8 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
                                 '{"name":"', oshi_name, ' Membership #', Strings.toString(tokenId),
                                 '", "description": "', oshi_name, ' Membership NFTs',
                                 '", "image" : "', dataURI, trait, extension,
-                                '"}'
+                                '", "attributes":[{"trait_type":"expression","value":"', trait, '"}, {"trait_type":"last burned","value":"', Strings.toString(membershipConfigs[tokenId].lastBurned), '"}]',
+                                '}'
                             )
                         )
                     )

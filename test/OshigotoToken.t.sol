@@ -18,7 +18,7 @@ contract OshigotoTest is Test {
     function setUp() public {
 
         vm.prank(alice);
-        dn = new OshigotoToken("DN404", "DN", initialTokenSupply, address(this));
+        dn = new OshigotoToken("DN404", "DN", "Alice", initialTokenSupply, address(this));
 
         nft = DN404Mirror(payable(address(dn.mirrorERC721())));
 
@@ -55,6 +55,7 @@ contract OshigotoTest is Test {
         dn.rankOf(1);
         console.log("Hi");
         console.log("rankOf: ", dn.rankOf(1));
+        console.log("tokenURI: ", nft.tokenURI(1));
 
         vm.stopPrank();
     }

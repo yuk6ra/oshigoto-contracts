@@ -15,13 +15,20 @@ contract OshigotoTokenScript is Script {
 
         string memory name = "Oshigoto Token";
         string memory symbol = "OST";
+        string memory oshi_name = "Alice";
         uint96 initialSupply = 0;
         address owner = address(this);
 
-        oshigotoToken = new OshigotoToken(name, symbol, initialSupply, owner);
+        oshigotoToken = new OshigotoToken(
+            name,
+            symbol,
+            oshi_name,
+            initialSupply,
+            owner
+        );
         checkCoin = CheckCoin(payable(address(0x6B58eAeEfDD3C4Da5B80dc7F3F26Fdc901D40b9b)));
         oshigotoToken.setPaymentTokenAddress(address(checkCoin));
-        // checkCoin.approve(address(oshigotoToken), 1000);
+        checkCoin.approve(address(oshigotoToken), 1000 ether);
         vm.stopBroadcast();
     }
 }

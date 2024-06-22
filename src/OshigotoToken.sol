@@ -16,6 +16,7 @@ import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 contract OshigotoToken is DN404, Ownable {
     string private _name;
     string private _symbol;
+    string private _oshi_name;
     string private _baseURI;
 
     string public dataURI = "https://bafybeig7wwdixqpzaqoxvbagbfxjbzgljzdgwgnufekrwtjeb7cjjvu7n4.ipfs.dweb.link/";
@@ -29,11 +30,13 @@ contract OshigotoToken is DN404, Ownable {
     constructor(
         string memory name_,
         string memory symbol_,
+        string memory oshi_name,
         uint96 initialTokenSupply,
         address initialSupplyOwner
     ) Ownable(msg.sender) {
         _name = name_;
         _symbol = symbol_;
+        _oshi_name = oshi_name;
 
         address mirror = address(new DN404Mirror(msg.sender));
         _initializeDN404(initialTokenSupply, initialSupplyOwner, mirror);
@@ -64,9 +67,9 @@ contract OshigotoToken is DN404, Ownable {
         }
 
         string memory json = string.concat(
-            '{"name": "Oshigoto #', Strings.toString(tokenId), '",',
+            '{"name": "', _oshi_name, ' Oshigoto #', Strings.toString(tokenId), '",',
             '"image":"', dataURI, trait, '.png",',
-            '"attributes":[{"trait_type":"Type","value":"', trait, '"}]}'
+            '"attributes":[{"trait_type":"Type","value":"', trait, '"}, {"trait_type":"Rank","value":"', Strings.toString(rank), '"}]}'
         );
 
         result = string.concat(
