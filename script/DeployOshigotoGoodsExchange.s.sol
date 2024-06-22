@@ -2,12 +2,12 @@
 pragma solidity ^0.8.4;
 
 import {OshigotoGoodsExchange} from "../src/OshigotoGoodsExchange.sol";
-import {CheckCoin} from "../src/CheckCoin.sol";
+import {OshigotoToken} from "../src/OshigotoToken.sol";
 import "forge-std/Script.sol";
 
 contract OshigotoGoodsExchangeScript is Script {
     OshigotoGoodsExchange public oshigotoGoodsExchange;
-    CheckCoin public checkCoin;
+    OshigotoToken public oshigotoToken;
 
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("DEV_PRIVATE_KEY");
@@ -18,19 +18,19 @@ contract OshigotoGoodsExchangeScript is Script {
         string memory oshi_name = "Alice";
         string memory dataURI = "https://bafybeidk3siwfxbnp5jbiw7fho5rjrf4gytjejrizcydxmz2upphnrjguy.ipfs.dweb.link/";
 
-        address owner = address(this);
-
-        checkCoin = CheckCoin(payable(address(0x6B58eAeEfDD3C4Da5B80dc7F3F26Fdc901D40b9b)));
+        address oshigotoTokenAddress = vm.envAddress("OSHIGOTO_TOKEN_ADDRESS");
 
         oshigotoGoodsExchange = new OshigotoGoodsExchange(
             name,
             symbol,
             oshi_name,
             dataURI,
-            address(checkCoin)
+            address(oshigotoTokenAddress) // Payment token address
         );
 
-        checkCoin.approve(address(oshigotoGoodsExchange), 1000 ether);
+        oshigotoToken = OshigotoToken(payable(address(oshigotoTokenAddress)));
+
+        oshigotoToken.approve(address(oshigotoGoodsExchange), 1 ether);
         vm.stopBroadcast();
     }
 }

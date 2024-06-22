@@ -39,21 +39,18 @@ contract OshigotoGoodsExchange is ERC5192, Ownable, ReentrancyGuard {
     }
 
     function purchaseGoodsA(address _to) external nonReentrant {
-        _purchaseGoods(_to, priceGoodsA);
-        goods[totalSupply] = "A";
+        _purchaseGoods(_to, priceGoodsA, "A");
     }
 
     function purchaseGoodsB(address _to) external nonReentrant {
-        _purchaseGoods(_to, priceGoodsB);
-        goods[totalSupply] = "B";
+        _purchaseGoods(_to, priceGoodsB, "B");
     }
 
     function purchaseGoodsC(address _to) external nonReentrant {
-        _purchaseGoods(_to, priceGoodsC);
-        goods[totalSupply] = "C";
+        _purchaseGoods(_to, priceGoodsC, "C");
     }
 
-    function _purchaseGoods(address _to, uint256 _price) internal {
+    function _purchaseGoods(address _to, uint256 _price, string memory _goods_type) private {
         require(paymentToken.balanceOf(msg.sender) >= _price, "Insufficient balance");
         require(paymentToken.allowance(msg.sender, address(this)) >= _price, "Insufficient allowance");
 
@@ -61,6 +58,7 @@ contract OshigotoGoodsExchange is ERC5192, Ownable, ReentrancyGuard {
 
         _mint(_to, totalSupply);
         if (isLocked) emit Locked(totalSupply);
+        goods[totalSupply] = _goods_type;
         totalSupply++;
     }
 
@@ -88,11 +86,11 @@ contract OshigotoGoodsExchange is ERC5192, Ownable, ReentrancyGuard {
                     Base64.encode(
                         bytes(
                             abi.encodePacked(
-                                '{"name":"', oshi_name, 'Goods #', Strings.toString(tokenId),
+                                '{"name":"', oshi_name, ' Goods #', Strings.toString(tokenId),
                                 '", "description": "', 'Goods ', goods[tokenId],
                                 '", "image" : "', dataURI, goods[tokenId], extension,
-                                '", "attributes": [{"trait_type": "goods type", "value": "', goods[tokenId],
-                                '"}'
+                                '", "attributes": [{"trait_type": "goods type", "value": "', goods[tokenId],'"}]'
+                                '}'
                             )
                         )
                     )
