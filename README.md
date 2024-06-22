@@ -138,8 +138,24 @@ make deploy-mock-dn404
 ```
 
 ```shell
-make deploy-logincoin
+make deploy-checkcoin
 make deploy-oshigototoken
+```
+
+## Deploy Oshigoto Membership
+
+```.env
+OSHIGOTO_TOKEN_ADDRESS=<your_oshigoto_token_address>
+```
+
+```shell
+make deploy-membership
+```
+
+## Verify Contract
+
+example:
+```shell
 forge verify-contract --etherscan-api-key ${KEY} ${CONTRACT_ADDRESS} ./src/LoginCoin.sol:LoginCoin  --chain 11155111
 ```
 
