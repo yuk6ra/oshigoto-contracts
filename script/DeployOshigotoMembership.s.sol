@@ -26,7 +26,7 @@ contract OshigotoMembershipScript is Script {
             oshigotoTokenAddress
         );
 
-        oshigotoToken = OshigotoToken(payable(address(0xbF567D6f1D03EF749C9eA23422c602Bb3e350EE1)));
+        oshigotoToken = OshigotoToken(payable(address(oshigotoTokenAddress)));
         dn404mirror = DN404Mirror(payable(address(oshigotoToken.mirrorERC721())));
         dn404mirror.setApprovalForAll(address(oshigotoMembership), true);
         oshigotoMembership.setMaterialContractAddress(address(dn404mirror), true);
