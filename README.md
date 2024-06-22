@@ -34,14 +34,17 @@ Automatically generated NFTs can be merged with NFTs intended for fan club membe
 ![Membership](./assets/membership.png)
 
 ## Contracts
-| Contract                                           | Description            | Status |
-| -------------------------------------------------- | ---------------------- | ------ |
-| [LoginCoin](./src/LoginCoin.sol)                   | ERC20 Demo Token       | Draft  |
-| [CheckCoin](./src/CheckCoin.sol)                   | ERC20 Demo Token       | Draft  |
-| [OshigotoToken](./src/OshigotoToken.sol)           | DN404 Token            | Draft  |
-| [OshigotoMembership](./src/OshigotoMembership.sol) | ERC721 Token           | Draft  |
-| [ERC6551Registry](./src/ERC6551Registry.sol)       | ERC6551 Registry       | Draft  |
-| [TokenBoundAccount](./src/TokenBoundAccount.sol)   | ERC6551 Implementation | Draft  |
+| Contract                                                 | Description            | Status |
+| -------------------------------------------------------- | ---------------------- | ------ |
+| [LoginCoin](./src/LoginCoin.sol)                         | ERC20 Demo Token       | Draft  |
+| [CheckCoin](./src/CheckCoin.sol)                         | ERC20 Demo Token       | Draft  |
+| [OshigotoToken](./src/OshigotoToken.sol)                 | ERC-7631               | Draft  |
+| [OshigotoMembership](./src/OshigotoMembership.sol)       | ERC721 Token           | Draft  |
+| [OshigotoGoodsExchange](./src/OshigotoGoodsExchange.sol) | ERC-5192 Token         | Draft  |
+| [MetaLivePOAP](./src/MetaLivePOAP.sol)                   | ERC-5192 Token         | Draft  |
+| [ERC5192](./src/ERC5192.sol)                             | ERC-5192 (SBT)          | Draft  |
+| [ERC6551Registry](./src/ERC6551Registry.sol)             | ERC-6551 Registry       | Draft  |
+| [TokenBoundAccount](./src/TokenBoundAccount.sol)         | ERC-6551 Implementation | Draft  |
 
 ## Tech Stack
 - UE5
@@ -50,6 +53,7 @@ Automatically generated NFTs can be merged with NFTs intended for fan club membe
 - Foundry
 - ERC-7631（a.k.a DN404）
 - ERC-6551
+- ERC-5192 (a.k.a SBT(Soulbound Token))
 - Web3.py
 - FastAPI
 - Python
@@ -169,3 +173,4 @@ forge verify-contract --etherscan-api-key ${KEY} ${CONTRACT_ADDRESS} ./src/Login
 - [DN404](https://github.com/Vectorized/dn404)
 - [ERC-7631](https://eips.ethereum.org/EIPS/eip-7631)
 - [ERC-6551](https://eips.ethereum.org/EIPS/eip-6551)
+- [ERC-5192](https://eips.ethereum.org/EIPS/eip-5192)
