@@ -20,6 +20,7 @@ contract OshigotoMembershipScript is Script {
             "AliceMembership",
             "AM",
             "Alice",
+            "",
             0xbF567D6f1D03EF749C9eA23422c602Bb3e350EE1 // OshigotoToken address
         );
 

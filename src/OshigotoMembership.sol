@@ -13,6 +13,8 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
     uint256 public totalSupply;
 
     string public oshi_name;
+    string public dataURI;
+    string public extension = ".png";
 
     OshigotoToken public oshigotoToken;
     DN404Mirror public dn404Mirror;
@@ -33,9 +35,11 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
         string memory _name,
         string memory _symbol,
         string memory _oshi_name,
+        string memory _dataURI,
         address _oshigotoTokenAddress
     ) ERC721(_name, _symbol) Ownable(msg.sender) {
         oshi_name = _oshi_name;
+        dataURI = _dataURI;
         oshigotoToken = OshigotoToken(payable(_oshigotoTokenAddress));
         dn404Mirror = DN404Mirror(payable(address(oshigotoToken.mirrorERC721())));
     }
@@ -62,14 +66,17 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
     ) public view override returns (string memory) {
 
         uint256 diff = block.timestamp - membershipConfigs[tokenId].lastBurned;
-        string memory image = "";
 
+        string memory trait;
         if (diff < 3 minutes) {
-            image = "https://bafybeicdgohbob4jqm5tdhsjyhnctmhu5niedbjmd7u3grivzwto4ogfxy.ipfs.dweb.link/";
-        } else if (diff < 5 minutes) {
-            image = "https://bafybeieyj6woxz2wqbneglkmnittnrt6pdmte3qx5qumtpgbwpr4dcfmcm.ipfs.dweb.link/";
+            // Smiling
+            trait = "smiling";
+        } else if (diff < 10 minutes) {
+            // Neutral
+            trait = "neutral";
         } else {
-            image = "https://bafybeigjbiob7sgtmikg2lygwh3wgd42io72fpimx4tnkwu6hi5rg434mm.ipfs.dweb.link/";
+            // Sad
+            trait = "sad";
         }
 
         return
@@ -81,7 +88,7 @@ contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
                             abi.encodePacked(
                                 '{"name":"', oshi_name, ' Membership #', Strings.toString(tokenId),
                                 '", "description": "', oshi_name, ' Membership NFTs',
-                                '", "image" : "', image,
+                                '", "image" : "', dataURI, trait, extension,
                                 '"}'
                             )
                         )

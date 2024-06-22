@@ -24,7 +24,13 @@ contract OshigotoMembershipTest is Test {
         dn404mirror = DN404Mirror(payable(address(oshigotoToken.mirrorERC721())));
         loginCoin = new LoginCoin("LoginCoin", "LC");
 
-        oshigotoMembership = new OshigotoMembership("AliceMembership", "AM", "Alice", address(oshigotoToken));
+        oshigotoMembership = new OshigotoMembership(
+            "AliceMembership",
+            "AM",
+            "Alice",
+            "https://bafybeig7wwdixqpzaqoxvbagbfxjbzgljzdgwgnufekrwtjeb7cjjvu7n4.ipfs.dweb.link/",
+            address(oshigotoToken)
+        );
         vm.stopPrank();
     }
 

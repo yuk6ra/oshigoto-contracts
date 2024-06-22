@@ -48,9 +48,9 @@ contract OshigotoToken is DN404, Ownable {
     }
 
     function _tokenURI(uint256 tokenId) internal view override returns (string memory result) {
-        uint8 rank = rankOf(tokenId);        
+        uint8 rank = rankOf(tokenId);
 
-        // Example of using patterns
+        string memory trait;
         if (rank == 1) {
             trait = "common";
         } else if (rank == 2) {
@@ -59,7 +59,7 @@ contract OshigotoToken is DN404, Ownable {
             trait = "rare";
         } else if (rank == 4) {
             trait = "epic";
-        } else
+        } else {
             trait = "legendary";
         }
 
