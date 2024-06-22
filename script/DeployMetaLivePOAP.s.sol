@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
-import {LoginCoin} from "../src/LoginCoin.sol";
+import {MetaLivePOAP} from "../src/MetaLivePOAP.sol";
 import "forge-std/Script.sol";
 
-contract LoginCoinScript is Script {
-    uint256 private constant _WAD = 1000000000000000000;
+contract MetaLivePOAPScript is Script {
+    MetaLivePOAP public metaLivePOAP;
 
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("DEV_PRIVATE_KEY");
