@@ -36,6 +36,10 @@ deploy-goods:
 	@echo "Deploying contract"
 	forge script script/DeployOshigotoGoodsExchange.s.sol:OshigotoGoodsExchangeScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
 
+deploy-poap:
+	@echo "Deploying contract"
+	forge script script/DeployMetaLivePOAP.s.sol:MetaLivePOAPScript --rpc-url ${DEV_RPC_URL} --broadcast --verify -vvvv
+
 verify-mock-dn404:
 	@echo "Verifying contract"
 	forge verify-contract --etherscan-api-key ${ETHERSCAN_API_KEY} ${}  ./src/LoginCoin.sol:LoginCoin --chain 11155111

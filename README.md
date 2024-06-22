@@ -152,6 +152,11 @@ OSHIGOTO_TOKEN_ADDRESS=<your_oshigoto_token_address>
 make deploy-membership
 ```
 
+## Deploy MetaLivePOAP
+```shell
+make deploy-poap
+```
+
 ## Verify Contract
 
 example:
