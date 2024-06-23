@@ -11,6 +11,7 @@ contract OshigotoTokenScript is Script {
 
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("DEV_PRIVATE_KEY");
+        address checkcoinAddress = vm.envAddress("CHECKCOIN_ADDRESS");
         vm.startBroadcast(deployerPrivateKey);
 
         string memory name = "Oshigoto Token";
@@ -26,7 +27,7 @@ contract OshigotoTokenScript is Script {
             initialSupply,
             owner
         );
-        checkCoin = CheckCoin(payable(address(0x6B58eAeEfDD3C4Da5B80dc7F3F26Fdc901D40b9b)));
+        checkCoin = CheckCoin(payable(address(checkcoinAddress)));
         oshigotoToken.setPaymentTokenAddress(address(checkCoin));
         checkCoin.approve(address(oshigotoToken), 1000 ether);
         vm.stopBroadcast();

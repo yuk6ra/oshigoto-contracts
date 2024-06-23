@@ -132,21 +132,29 @@ $ cast --help
 
 ## Development
 
+### Deploy sample contracts
 
 ```shell
 make test
 ```
 
 ```shell
-make deploy-mock-dn404
+make deploy-checkcoin
+make deploy-erc6551
+make deploy-tba
+```
+
+### Deploy Oshigoto Token
+
+.env
+```shell
+CHECKCOIN_ADDRESS=<your_checkcoin_address>
 ```
 
 ```shell
-make deploy-checkcoin
 make deploy-oshigototoken
 ```
-
-## Deploy Oshigoto Membership
+### Deploy Oshigoto Membership
 
 ```.env
 OSHIGOTO_TOKEN_ADDRESS=<your_oshigoto_token_address>
@@ -156,12 +164,18 @@ OSHIGOTO_TOKEN_ADDRESS=<your_oshigoto_token_address>
 make deploy-membership
 ```
 
-## Deploy MetaLivePOAP
+### Deploy Oshigoto Goods Exchange
+
+```shell
+make deploy-goods
+```
+
+### Deploy MetaLivePOAP
 ```shell
 make deploy-poap
 ```
 
-## Verify Contract
+### Verify Contract
 
 example:
 ```shell

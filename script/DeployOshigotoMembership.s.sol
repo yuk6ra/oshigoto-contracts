@@ -19,7 +19,7 @@ contract OshigotoMembershipScript is Script {
         address oshigotoTokenAddress = vm.envAddress("OSHIGOTO_TOKEN_ADDRESS");
 
         oshigotoMembership = new OshigotoMembership(
-            "AliceMembership",
+            "Alice Membership",
             "AM",
             "Alice",
             "https://bafybeiad4heb2zbyqgeigp5n6auz57dnk43ggm2qzkwhoxvp66dyinredm.ipfs.dweb.link/",
