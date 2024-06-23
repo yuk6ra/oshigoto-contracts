@@ -10,7 +10,7 @@ import {OshigotoToken} from "./OshigotoToken.sol";
 import {DN404Mirror} from "./dn404/DN404Mirror.sol";
 
 contract OshigotoMembership is ERC721, Ownable, ReentrancyGuard {
-    uint256 public totalSupply;
+    uint256 public totalSupply = 1;
 
     string public oshi_name;
     string public dataURI;

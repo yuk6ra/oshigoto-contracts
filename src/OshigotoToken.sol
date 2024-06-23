@@ -86,6 +86,8 @@ contract OshigotoToken is DN404, Ownable {
         require(paymentToken.balanceOf(msg.sender) >= priceWithERC20Token, "Insufficient token balance");
         require(paymentToken.allowance(msg.sender, address(this)) >= priceWithERC20Token, "Token allowance too low");
 
+        // @dev Need a target membership
+
         paymentToken.transferFrom(msg.sender, address(this), priceWithERC20Token);
 
         _mint(_to, mintAmount);
@@ -93,6 +95,9 @@ contract OshigotoToken is DN404, Ownable {
 
     function mintWithNativeToken(address _to) public payable {
         require(msg.value >= priceWithNativeToken, "Insufficient payment");
+
+        // @dev Need a target membership
+
         _mint(_to, mintAmount);
     }
 

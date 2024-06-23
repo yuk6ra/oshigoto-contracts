@@ -34,17 +34,17 @@ Automatically generated NFTs can be merged with NFTs intended for fan club membe
 ![Membership](./assets/membership.png)
 
 ## Contracts
-| Contract                                                 | Description            | Status |
-| -------------------------------------------------------- | ---------------------- | ------ |
-| [LoginCoin](./src/LoginCoin.sol)                         | ERC20 Demo Token       | Draft  |
-| [CheckCoin](./src/CheckCoin.sol)                         | ERC20 Demo Token       | Draft  |
-| [OshigotoToken](./src/OshigotoToken.sol)                 | ERC-7631               | Draft  |
-| [OshigotoMembership](./src/OshigotoMembership.sol)       | ERC721 Token           | Draft  |
-| [OshigotoGoodsExchange](./src/OshigotoGoodsExchange.sol) | ERC-5192 Token         | Draft  |
-| [MetaLivePOAP](./src/MetaLivePOAP.sol)                   | ERC-5192 Token         | Draft  |
-| [ERC5192](./src/ERC5192.sol)                             | ERC-5192 (SBT)          | Draft  |
-| [ERC6551Registry](./src/ERC6551Registry.sol)             | ERC-6551 Registry       | Draft  |
-| [TokenBoundAccount](./src/TokenBoundAccount.sol)         | ERC-6551 Implementation | Draft  |
+| Contract                                                 | Description            | Deployed |
+| -------------------------------------------------------- | ---------------------- | -------- |
+| [CheckCoin](./src/CheckCoin.sol)                         | ERC-20 Demo Token       | [0xDB9D73B5e559C541b78b08091C41e7EC4519232b](https://sepolia.etherscan.io/token/0xDB9D73B5e559C541b78b08091C41e7EC4519232b)  |
+| [OshigotoToken](./src/OshigotoToken.sol)                 | ERC-7631               | [0xF01C3aFb034940d50f4767526032c02569719233](https://sepolia.etherscan.io/token/0xF01C3aFb034940d50f4767526032c02569719233)  |
+| [OshigotoMembership](./src/OshigotoMembership.sol)       | ERC-721 Token           | [0xd3298fb42f7DC971475F5Bf01271Ef60Cf47257D](https://sepolia.etherscan.io/token/0xd3298fb42f7DC971475F5Bf01271Ef60Cf47257D)  |
+| [OshigotoGoodsExchange](./src/OshigotoGoodsExchange.sol) | ERC-5192 Token         | [0x25A3d7d8FFCD90895Abb3f96fe64F6c61a5430EE](https://sepolia.etherscan.io/token/0x25A3d7d8FFCD90895Abb3f96fe64F6c61a5430EE) |
+| [MetaLivePOAP](./src/MetaLivePOAP.sol)                   | ERC-5192 Token         | [0x1e23D186C33A6222eD10b43daDfcF9ACD04392AE](https://sepolia.etherscan.io/token/0x1e23D186C33A6222eD10b43daDfcF9ACD04392AE) |
+| [ERC5192](./src/ERC5192.sol)                             | ERC-5192 (SBT)          | -  |
+| [ERC6551Registry](./src/ERC6551Registry.sol)             | ERC-6551 Registry       | [0xfba610bC413b39B16aAFc2Eb7AF5063b5664547E](https://sepolia.etherscan.io/token/0xfba610bC413b39B16aAFc2Eb7AF5063b5664547E)  |
+| [TokenBoundAccount](./src/TokenBoundAccount.sol)         | ERC-6551 Implementation | [0x43D6F857C7a1cf350ed6f4543C0f7646506E890E](https://sepolia.etherscan.io/token/0x43D6F857C7a1cf350ed6f4543C0f7646506E890E)  |
+| [DN404Mirror](./src/dn404/DN404Mirror.sol)              | ERC-7631 (ERC-721)               | [0x1A5db3AEFE70149b5927b96e070088A76dD8731d](https://sepolia.etherscan.io/token/0x1A5db3AEFE70149b5927b96e070088A76dD8731d)  |
 
 ## Tech Stack
 - UE5
@@ -164,6 +164,8 @@ OSHIGOTO_TOKEN_ADDRESS=<your_oshigoto_token_address>
 make deploy-membership
 ```
 
+*You need to execute `setApprovalForAll` to allow the contract to transfer the NFT.
+
 ### Deploy Oshigoto Goods Exchange
 
 ```shell
@@ -184,6 +186,7 @@ forge verify-contract --etherscan-api-key ${KEY} ${CONTRACT_ADDRESS} ./src/Login
 
 ## References
 - Pandora Contract: [0x9E9FbDE7C7a83c43913BddC8779158F1368F0413](https://etherscan.io/address/0x9e9fbde7c7a83c43913bddc8779158f1368f0413#code)
+- Vitalik, Soulbound, https://vitalik.eth.limo/general/2022/01/26/soulbound.html
 - [DN404](https://github.com/Vectorized/dn404)
 - [ERC-7631](https://eips.ethereum.org/EIPS/eip-7631)
 - [ERC-6551](https://eips.ethereum.org/EIPS/eip-6551)
